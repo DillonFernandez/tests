@@ -14,24 +14,24 @@
               <img src="your-logo-image-url.png" alt="Logo">
           </div>
           <b><div class="big-navigation">
-              <ul>
-                  <li><a href="">Page 1</a></li>
-                  <li><a href="">Page 2</a></li>
-                  <li><a href="">Page 3</a></li>
-                  <li><a href="">Page 4</a></li>
-                  <li><a href="">Page 5</a></li>
-              </ul>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="">Page 2</a></li>
+              <li><a href="">Page 3</a></li>
+              <li><a href="">Page 4</a></li>
+              <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
           </div></b>
           <span class="hamburger" onclick="openNav()">&#9776;</span>
           <div id="myNav" class="small-navigation">
-              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-              <div class="small-navigation-content">
-                  <a href="#">Page 1</a>
-                  <a href="#">Page 2</a>
-                  <a href="#">Page 3</a>
-                  <a href="#">Page 4</a>
-                  <a href="#">Page 5</a>
-              </div>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="small-navigation-content">
+              <a href="index.html">Home</a>
+              <a href="#">Page 2</a>
+              <a href="#">Page 3</a>
+              <a href="#">Page 4</a>
+              <a href="contact-us.html">Contact Us</a>
+            </div>
           </div>
         </div>
         <div class="banner">
@@ -43,8 +43,92 @@
           </div>
         </div>          
       </header>
-              
+      <div class="search-engine">
+        <div class="search-engine-container">
+          <div class="search-engine-bar">
+            <fieldset>
+              <legend>Flying From</legend>
+              <input type="text" class="search-engine-flying-from" placeholder="e.g. New York">
+            </fieldset>
+            <fieldset>
+              <legend>Flights To</legend>
+              <input type="text" class="search-engine-flights-to" placeholder="e.g. London">
+            </fieldset>
+            <fieldset>
+              <legend>When</legend>
+              <input type="date" class="search-engine-when" id="search-engine-when">
+            </fieldset>
+            <fieldset class="journey-dropdown">
+              <legend>Journey</legend>
+              <button class="journey-button">Round Trip</button>
+              <div class="journey-dropdown-menu">
+                <p>Select your journey type</p><br>
+                <div class="journey-options">
+                  <button class="journey-option active" data-value="round-trip">Round Trip</button>
+                  <button class="journey-option" data-value="one-way">One Way</button>
+                  <button class="journey-option" data-value="multi-city">Multi City</button>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="who-dropdown">
+              <legend>Who</legend>
+              <button class="who-button">1 person</button>
+              <div class="who-dropdown-menu">
+                <p>Age at date of travel</p><br>
+                <div class="who-passenger-type">
+                  <div class="passenger-info">
+                    <span class="passenger-type">Adults</span>
+                    <span class="age-range">Age 16 and over</span>
+                  </div>
+                  <div class="who-counter">
+                    <button class="who-decrement">-</button>
+                    <span class="who-count" data-type="adult">1</span>
+                    <button class="who-increment">+</button>
+                  </div>
+                </div>
+                <div class="who-passenger-type">
+                  <div class="passenger-info">
+                    <span class="passenger-type">Young Adults</span>
+                    <span class="age-range">Age 12 to 15</span>
+                  </div>
+                  <div class="who-counter">
+                    <button class="who-decrement">-</button>
+                    <span class="who-count" data-type="young-adult">0</span>
+                    <button class="who-increment">+</button>
+                  </div>
+                </div>
+                <div class="who-passenger-type">
+                  <div class="passenger-info">
+                    <span class="passenger-type">Children</span>
+                    <span class="age-range">Age 2 to 11</span>
+                  </div>
+                  <div class="who-counter">
+                    <button class="who-decrement">-</button>
+                    <span class="who-count" data-type="child">0</span>
+                    <button class="who-increment">+</button>
+                  </div>
+                </div>
+                <div class="who-passenger-type">
+                  <div class="passenger-info">
+                    <span class="passenger-type">Infants</span>
+                    <span class="age-range">Under 2 years old</span>
+                  </div>
+                  <div class="who-counter">
+                    <button class="who-decrement">-</button>
+                    <span class="who-count" data-type="infant">0</span>
+                    <button class="who-increment">+</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <button class="search-engine-button">Search Flights</button>
+          </div>
+        </div>
+      </div>
+       
+      <button id="scrollToTopBtn" class="scroll-to-top-btn">&#10094;</button>                   
       <script src="script.js"></script>
+      <br>
     </body>
     <footer>
       <div class="footer-container">
@@ -76,11 +160,11 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <a href="#">Page 1</a> | 
+        <a href="index.html">Home</a> | 
         <a href="#">Page 2</a> | 
         <a href="#">Page 3</a> | 
         <a href="#">Page 4</a> | 
-        <a href="#">Page 5</a>
+        <a href="contact-us.html">Contact Us</a>
         <p>Copyright © 2024 Travel - All Rights Reserved.</p>
       </div>
     </footer>
