@@ -228,3 +228,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const today = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
   dateInput.setAttribute('min', today); // Set the 'min' attribute to today's date
 });
+
+/* ----------------------------------------------------------------------------------------------------*/
+
+// Carousel
+// This script will add clones dynamically to create the infinite loop
+const carouselContent = document.querySelector('.carousel-content');
+const carouselItems = document.querySelectorAll('.carousel-item');
+const itemCount = carouselItems.length;
+
+// Clone the items and append them to the carousel to create the seamless loop
+for (let i = 0; i < itemCount; i++) {
+  const clonedItem = carouselItems[i].cloneNode(true);
+  carouselContent.appendChild(clonedItem);
+}
+
+// Adjust the width of the carousel content dynamically (Optional)
+carouselContent.style.width = `${carouselItems.length * 350}px`; /* Adjust width to match the new item size */
+
+/* ----------------------------------------------------------------------------------------------------*/
+
