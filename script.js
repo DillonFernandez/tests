@@ -248,3 +248,27 @@ carouselContent.style.width = `${carouselItems.length * 350}px`; /* Adjust width
 
 /* ----------------------------------------------------------------------------------------------------*/
 
+// Slide Show 1
+const slideshow1bigLeft = document.querySelectorAll('.slideshow1big-left .slideshow1big-slide');
+const slideshow1bigRight = document.querySelectorAll('.slideshow1big-right .slideshow1big-slide');
+
+let activeIndex = 0;
+
+function setActiveSlide(index) {
+    slideshow1bigRight.forEach((slide, i) => {
+        slide.classList.toggle('visible', i === index);
+    });
+
+    slideshow1bigLeft.forEach((slide, i) => {
+        slide.style.transform = i === index ? 'scale(1)' : 'scale(1)';
+        slide.style.opacity = i === index ? '1' : '0.6';
+    });
+
+    activeIndex = index;
+}
+
+slideshow1bigLeft.forEach((slide, index) => {
+    slide.addEventListener('click', () => setActiveSlide(index));
+});
+
+setActiveSlide(activeIndex);
