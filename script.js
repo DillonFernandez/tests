@@ -249,26 +249,119 @@ carouselContent.style.width = `${carouselItems.length * 350}px`; /* Adjust width
 /* ----------------------------------------------------------------------------------------------------*/
 
 // Slide Show 1
-const slideshow1bigLeft = document.querySelectorAll('.slideshow1big-left .slideshow1big-slide');
-const slideshow1bigRight = document.querySelectorAll('.slideshow1big-right .slideshow1big-slide');
+const slideshow1Images = [
+  { 
+    h2: "Wallalwwa - Colombo", 
+    p: "Set amidst 200-year-old tropical gardens and just 20 minutes from Sri Lanka’s main international gateway, Wallawwa is an award-winning 18-bedroom country house hotel, unlike any other airport hotel you’ve stayed at.", 
+    img: "Pictures/Slide Show 1/1 - Wallalwwa.webp", 
+    alt: "Wallalwwa - Colombo",
+    button1Link: "",
+    button2Link: ""
+  },
+  { 
+    h2: "Fort Bazzar - Galle Fort", 
+    p: "Situated within 16th century UNESCO Galle Fort, Fort Bazaar is a former merchant’s home turned boutique hotel with 18 bedrooms and suites, a first-class spa, and a vibrant culinary offering.", 
+    img: "Pictures/Slide Show 1/2 - Fort Bazzar.webp", 
+    alt: "Fort Bazzar - Galle Fort",
+    button1Link: "",
+    button2Link: ""
+  },
+  { 
+    h2: "Kumu Beach - Balapitiya", 
+    p: "Home to 10 indulgent bedrooms, this luxury, boutique spa hotel is footsteps away from sun, sand, and sea on Sri Lanka’s south-west coast.", 
+    img: "Pictures/Slide Show 1/3 - Kumu Beach.webp", 
+    alt: "Kumu Beach - Balapitiya",
+    button1Link: "",
+    button2Link: ""
+  },
+  { 
+    h2: "Camellia Hills - Dickoya", 
+    p: "Nestled within Sri Lanka’s Central Highlands, Camellia Hills is a stylish 5-bedroom tea bungalow enveloped by breathtaking tea plantations and the mirror-still Castlereagh Reservoir.", 
+    img: "Pictures/Slide Show 1/4 - Camellia Hills.webp", 
+    alt: "Camellia Hills - Dickoya",
+    button1Link: "",
+    button2Link: ""
+  },
+  { 
+    h2: "Goatfell - Nuwara Eliya", 
+    p: "Perched amongst tea bushes high up a hill near Nuwara Eliya, Goatfell is a luxurious 4-bedroom bungalow, with exceptional views of the island’s tea country.", 
+    img: "Pictures/Slide Show 1/5 - Goatfell.webp", 
+    alt: "Goatfell - Nuwara Eliya",
+    button1Link: "",
+    button2Link: ""
+  },
+  { 
+    h2: "Nine Skies - Ella", 
+    p: "With far-reaching views over Ella’s mountain range, our beautifully restored 5-bedroom tea bungalow blends the contemporary with an old-world aesthetic.", 
+    img: "Pictures/Slide Show 1/6 - Nine Skies.webp", 
+    alt: "Nine Skies - Ella",
+    button1Link: "",
+    button2Link: ""
+  },
+  { 
+    h2: "Lunuganga - Bentota", 
+    p: "Geoffrey Bawa’s soulful, country estate sits near west-coast Bentota and features 10 uniquely individual rooms spread across serendipitous 15-acre gardens, complete with a swimming pool and daily garden tours.", 
+    img: "Pictures/Slide Show 1/7 - Lunuganga.webp", 
+    alt: "Lunuganga - Bentota",
+    button1Link: "",
+    button2Link: ""
+  }
+];
 
-let activeIndex = 0;
+let slideshow1CurrentIndex = 0;
 
-function setActiveSlide(index) {
-    slideshow1bigRight.forEach((slide, i) => {
-        slide.classList.toggle('visible', i === index);
-    });
+function renderSlides() {
+  const slideshow1SlideContainer = document.getElementById('slideshow1-slides');
+  const slideshow1TotalSlidesNumber = document.getElementById('slideshow1-totalSlidesNumber');
+  const slideshow1CurrentSlideNumber = document.getElementById('slideshow1-currentSlideNumber');
 
-    slideshow1bigLeft.forEach((slide, i) => {
-        slide.style.transform = i === index ? 'scale(1)' : 'scale(1)';
-        slide.style.opacity = i === index ? '1' : '0.6';
-    });
+  slideshow1TotalSlidesNumber.textContent = slideshow1Images.length;
+  slideshow1CurrentSlideNumber.textContent = slideshow1CurrentIndex + 1;
 
-    activeIndex = index;
+  slideshow1SlideContainer.innerHTML = '';
+
+  // Dynamically calculate the number of images based on the window width
+  let slideshow1NumImagesToShow;
+  if (window.innerWidth < 850) {
+    slideshow1NumImagesToShow = 1; // Show 1 image for widths less than 850px
+  } else if (window.innerWidth < 1300) {
+    slideshow1NumImagesToShow = 2; // Show 2 images for widths less than 1300px
+  } else {
+    slideshow1NumImagesToShow = 3; // Show 3 images for widths greater than 1300px
+  }
+
+  for (let i = 0; i < slideshow1NumImagesToShow; i++) {
+    const slideshow1ImgIndex = (slideshow1CurrentIndex + i) % slideshow1Images.length;
+    const image = slideshow1Images[slideshow1ImgIndex];
+    const div = document.createElement('div');
+    div.className = 'slideshow1-image-container' + (i === 0 ? ' focus' : '');
+    div.innerHTML = `
+      <img src="${image.img}" alt="${image.alt}">
+      <div class="slideshow1-text-button-container">
+        <h2>${image.h2}</h2>
+        <p>${image.p}</p>
+        <div class="slideshow1-buttons">
+          <button onclick="window.location.href='${image.button1Link}'">Explore</button>
+          <button onclick="window.location.href='${image.button2Link}'">Check Availability</button>
+        </div>
+      </div>
+    `;
+    slideshow1SlideContainer.appendChild(div);
+  }
 }
 
-slideshow1bigLeft.forEach((slide, index) => {
-    slide.addEventListener('click', () => setActiveSlide(index));
-});
+function nextSlide() {
+  slideshow1CurrentIndex = (slideshow1CurrentIndex + 1) % slideshow1Images.length;
+  renderSlides();
+}
 
-setActiveSlide(activeIndex);
+function prevSlide() {
+  slideshow1CurrentIndex = (slideshow1CurrentIndex - 1 + slideshow1Images.length) % slideshow1Images.length;
+  renderSlides();
+}
+
+// Initial render
+renderSlides();
+
+// Re-render slides when window is resized
+window.addEventListener('resize', renderSlides);
