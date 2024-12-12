@@ -365,3 +365,141 @@ renderSlides();
 
 // Re-render slides when window is resized
 window.addEventListener('resize', renderSlides);
+
+/* ----------------------------------------------------------------------------------------------------*/
+
+// Slide Show 2
+// Initialize the current slide index to 0 (first slide)
+let currentIndex = 0;
+
+// Function to display the slide based on the index
+function showSlide(index) {
+    const items = document.querySelectorAll('.slideshow2-item'); // Get all slideshow items
+    const totalItems = items.length; // Get the total number of slides
+
+    // Check if the index is out of bounds, if it is, return
+    if (index >= totalItems) {
+        return;
+    } else if (index < 0) {
+        return;
+    } else {
+        currentIndex = index; // Set the current index to the passed index
+    }
+
+    // Calculate the offset to move the slide container and display the correct slide
+    const offset = -currentIndex * 100; 
+    document.querySelector('.slideshow2-inner').style.transform = `translateX(${offset}%)`;
+
+    // Update images' classes based on the current slide
+    items.forEach((item, i) => {
+        const images = item.querySelectorAll('img');
+        images.forEach((img, idx) => {
+            img.classList.remove('full', 'half'); // Remove existing classes
+            if (i === currentIndex) {
+                // Add 'full' class to the center image, 'half' to the other images
+                if (idx === 1) {
+                    img.classList.add('full');
+                } else {
+                    img.classList.add('half');
+                }
+            } else {
+                img.classList.add('half'); // For non-active slides, apply 'half' class
+            }
+        });
+    });
+
+    // Toggle visibility of slide text based on the current slide
+    const texts = document.querySelectorAll('.slideshow2-slide-text');
+    texts.forEach((text, i) => {
+        text.style.display = (i === currentIndex) ? 'block' : 'none'; // Show text only for the current slide
+    });
+
+    // Update the slide number display (e.g., "1 / 5")
+    updateSlideNumber();
+    // Update the state of the navigation buttons (enable/disable)
+    updateButtons();
+}
+
+// Function to update the slide number displayed at the bottom
+function updateSlideNumber() {
+    const slideNumberElement = document.querySelector('#slide-number');
+    slideNumberElement.textContent = `${currentIndex + 1} / 5`; // Display current slide index and total slides
+}
+
+// Function to enable/disable the next and previous buttons based on the current slide
+function updateButtons() {
+    const nextButton = document.querySelector('.next');
+    const prevButton = document.querySelector('.prev');
+
+    // Disable the 'previous' button if we're on the first slide
+    if (currentIndex === 0) {
+        prevButton.disabled = true;
+    } else {
+        prevButton.disabled = false; // Enable 'previous' button if not on the first slide
+    }
+
+    // Disable the 'next' button if we're on the last slide
+    if (currentIndex === document.querySelectorAll('.slideshow2-item').length - 1) {
+        nextButton.disabled = true;
+    } else {
+        nextButton.disabled = false; // Enable 'next' button if not on the last slide
+    }
+}
+
+// Function to go to the next slide
+function nextSlide() {
+    // Check if we're not on the last slide
+    if (currentIndex < document.querySelectorAll('.slideshow2-item').length - 1) {
+        showSlide(currentIndex + 1); // Show the next slide
+    }
+}
+
+// Function to go to the previous slide
+function prevSlide() {
+    // Check if we're not on the first slide
+    if (currentIndex > 0) {
+        showSlide(currentIndex - 1); // Show the previous slide
+    }
+}
+
+// Initial call to set up the buttons and display the first slide
+updateButtons();
+showSlide(currentIndex);
+
+/* ----------------------------------------------------------------------------------------------------*/
+
+// Slide Show 3
+const slideshow3Carousel = document.getElementById('slideshow3-carousel');
+const slideshow3CarouselScroll = document.getElementById('slideshow3-carouselScroll');
+    
+let isScrolling = false;
+  
+// Synchronize the range input with the carousel scroll position
+slideshow3CarouselScroll.addEventListener('input', () => {
+  const maxScrollLeft = slideshow3Carousel.scrollWidth - slideshow3Carousel.clientWidth;
+  const scrollAmount = (slideshow3CarouselScroll.value / 100) * maxScrollLeft;
+  slideshow3Carousel.scrollLeft = scrollAmount;
+});
+  
+// Throttle the scroll event to improve performance
+const throttle = (callback, delay) => {
+  if (isScrolling) return;
+  isScrolling = true;
+  setTimeout(() => {
+    callback();
+    isScrolling = false;
+  }, delay);
+};
+  
+// Update range input position based on carousel scroll position
+slideshow3Carousel.addEventListener('scroll', () => {
+  throttle(() => {
+    const maxScrollLeft = slideshow3Carousel.scrollWidth - slideshow3Carousel.clientWidth;
+    const scrollValue = (slideshow3Carousel.scrollLeft / maxScrollLeft) * 100;
+    slideshow3CarouselScroll.value = scrollValue;
+  }, 100); // Throttle time to 100ms
+});
+
+/* ----------------------------------------------------------------------------------------------------*/
+
+// Inbox
