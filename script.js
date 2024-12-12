@@ -350,12 +350,12 @@ function renderSlides() {
   }
 }
 
-function nextSlide() {
+function slideshow1nextSlide() {
   slideshow1CurrentIndex = (slideshow1CurrentIndex + 1) % slideshow1Images.length;
   renderSlides();
 }
 
-function prevSlide() {
+function slideshow1prevSlide() {
   slideshow1CurrentIndex = (slideshow1CurrentIndex - 1 + slideshow1Images.length) % slideshow1Images.length;
   renderSlides();
 }
@@ -447,7 +447,7 @@ function updateButtons() {
 }
 
 // Function to go to the next slide
-function nextSlide() {
+function slideshow2nextSlide() {
     // Check if we're not on the last slide
     if (currentIndex < document.querySelectorAll('.slideshow2-item').length - 1) {
         showSlide(currentIndex + 1); // Show the next slide
@@ -455,7 +455,7 @@ function nextSlide() {
 }
 
 // Function to go to the previous slide
-function prevSlide() {
+function slideshow2prevSlide() {
     // Check if we're not on the first slide
     if (currentIndex > 0) {
         showSlide(currentIndex - 1); // Show the previous slide
